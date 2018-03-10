@@ -54,13 +54,28 @@ class TextClustering:
 
         # result
         r["category"] = self.process_text(j_obj["originalText"])
-        r["DocumentID"] = j_obj["llAnnotation"]["DocumentID"]
+        r["DocumentID"] = self.process_id(j_obj)
         return r
 
     def process_text(self, s):
         labels = self.parser.findall(s)
         logger.info("Parser Labels: " + str(labels))
         return self.classify(labels)
+
+    def process_id(self, json_obj):
+        """
+        Format 1. json object ["llAnnotation"]["DocumentID"] (str)
+        Format 2. json object ["id"] (int)
+        """
+        document_id = None
+        if json_obj.get("llAnnotation"):
+            if json_obj.get("llAnnotation").get("DocumentID"):
+                document_id = json_obj.get("llAnnotation").get("DocumentID")
+        elif json_obj.get("id"):
+            document_id = json_obj.get("id")
+        if type(document_id) != str:
+            document_id = str(document_id)
+        return document_id
 
     def classify(self, labels):
         classified_label = None
