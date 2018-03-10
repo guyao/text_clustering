@@ -25,3 +25,28 @@ optional arguments:
   -v          Verbose output
 ```
 
+## Input Format
+
+
+```
+{
+    "originalText": "Text", 
+    "createdAt": "1970-01-01T00:00:00Z", 
+    "ORG": [
+        "RT"
+    ], 
+    "language": "en", 
+    "id": 123456789012345678, 
+    "sentimentString": "Negative, Activation", 
+    "GPE": [
+        "GPEVALUE"
+    ], 
+    "geoLocations": [
+        {
+            "lat": 00.0000, 
+            "lon": 00.0000, 
+            "geohash": "abcdefghi"
+        }
+    ]
+}
+```

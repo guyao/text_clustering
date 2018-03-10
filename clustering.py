@@ -68,13 +68,13 @@ class TextClustering:
         Format 2. json object ["id"] (int)
         """
         document_id = None
-        if json_obj.get("llAnnotation"):
+        if json_obj.get("id"):
+            document_id = json_obj.get("id")
+        elif json_obj.get("llAnnotation"):
             if json_obj.get("llAnnotation").get("DocumentID"):
                 document_id = json_obj.get("llAnnotation").get("DocumentID")
-        elif json_obj.get("id"):
-            document_id = json_obj.get("id")
-        if type(document_id) != str:
-            document_id = str(document_id)
+        if type(document_id) != int:
+            document_id = int(document_id)
         return document_id
 
     def classify(self, labels):
